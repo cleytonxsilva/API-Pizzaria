@@ -19,15 +19,15 @@ public class Funcionario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotNull(message = "Nome do funcionário não pode ser nulo!")
     private String nome;
 
-    @NotNull
+    @NotNull(message = "CPF não pode ser nulo!")
     private String cpf;
 
     private int telefone;
 
-    @NotNull //unique
+    @NotNull(message = "Matricula não pode ser nula!") //unique
     private int matricula;
 
 }

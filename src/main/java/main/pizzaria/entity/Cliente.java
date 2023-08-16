@@ -20,19 +20,19 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotNull(message = "CPF não pode ser nulo!")
     private String cpf;
 
-    @NotNull
+    @NotNull(message = "Nome não pode ser nulo!")
     private String nome;
 
     private int idade;
 
-    @NotNull
+    @NotNull(message = "Telefone não pode ser nulo!")
     private int telefone;
 
-    @NotNull
     @OneToMany
+    @NotNull(message = "Endereço não pode ser nulo!")
     private List<Endereco> enderecos;
 
 }

@@ -21,19 +21,19 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private int numeroPedidos;
+    @NotNull(message = "Número do pedido não pode ser nulo!")
+    private int numeroPedido;
 
-    @NotNull
+    @NotNull(message = "Campo 'entrega' não pode ser nulo!")
     private boolean entregar;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "clientes_id")
+    @NotNull(message = "Cliente não pode ser nulo!")
     private Cliente cliente;
 
-    @NotNull
     @OneToMany
     @JoinColumn(name = "produtos_id")
+    @NotNull(message = "Produto não pode ser nulo!")
     private List<Produto> produtos;
 }
