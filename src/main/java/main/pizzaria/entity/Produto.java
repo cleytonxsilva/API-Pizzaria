@@ -27,7 +27,6 @@ public class Produto {
     @NotNull(message = "Tamanho não pode ser nulo!") //PEQUENA, MEDIA, GRANDE, GIGANTE
     private String tamanho;
 
-    @OneToMany
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Ingrediente não pode ser nulo!")
     private List<Ingrediente> ingredientes;
