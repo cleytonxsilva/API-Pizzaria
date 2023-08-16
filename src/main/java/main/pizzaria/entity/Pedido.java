@@ -27,13 +27,13 @@ public class Pedido {
     @NotNull
     private boolean entregar;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "clientes_id")
-    @NotNull
     private Cliente cliente;
 
-    @ManyToOne
-    @JoinColumn(name = "produtos_id")
     @NotNull
+    @OneToMany
+    @JoinColumn(name = "produtos_id")
     private List<Produto> produtos;
 }

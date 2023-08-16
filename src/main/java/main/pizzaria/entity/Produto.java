@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -27,5 +29,6 @@ public class Produto {
 
     @NotNull
     @OneToMany
+    @Enumerated(EnumType.STRING)
     private List<Ingrediente> ingredientes;
 }
