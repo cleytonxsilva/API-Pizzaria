@@ -24,7 +24,7 @@ public class Produto {
     @NotNull(message = "Nome do produto não pode ser nulo!")
     private String nome;
 
-    @NotNull(message = "Tamanho não pode ser nulo!")
+    @NotNull(message = "Tamanho não pode ser nulo!") //PEQUENA, MEDIA, GRANDE, GIGANTE
     private String tamanho;
 
     @OneToMany
