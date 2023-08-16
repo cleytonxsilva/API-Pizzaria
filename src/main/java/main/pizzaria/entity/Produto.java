@@ -7,33 +7,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @Entity
-@Table(name = "pedidos", schema = "private")
+@Table(name = "produtos", schema = "private")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pedido {
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private int numeroPedidos;
+    private String nome;
 
     @NotNull
-    private boolean entregar;
+    private String tamanho;
 
-    @ManyToOne
-    @JoinColumn(name = "clientes_id")
     @NotNull
-    private Cliente cliente;
-
-    @ManyToOne
-    @JoinColumn(name = "produtos_id")
-    @NotNull
-    private List<Produto> produtos;
+    @OneToMany
+    private List<Ingrediente> ingredientes;
 }
