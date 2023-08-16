@@ -10,19 +10,28 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "enderecos", schema = "private")
+@Table(name = "pedidos", schema = "private")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Endereco {
+public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String rua;
+    private int numeroPedidos;
 
     @NotNull
-    private int numero;
+    private boolean entregar;
 
+    @ManyToOne
+    @JoinColumn(name = "clientes_id")
+    @NotNull
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "produtos_id")
+    @NotNull
+    private Produto produtos;
 }
