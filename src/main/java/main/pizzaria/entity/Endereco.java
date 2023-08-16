@@ -7,32 +7,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "clientes", schema = "private")
+@Table(name = "enderecos", schema = "private")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente {
+public class Endereco {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String cpf;
+    private String rua;
 
     @NotNull
-    private String nome;
-
-    private int idade;
-
-    @NotNull
-    private int telefone;
-
-    @NotNull
-    @OneToMany
-    private List<Endereco> enderecos;
+    private int numero;
 
 }
