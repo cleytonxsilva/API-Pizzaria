@@ -1,6 +1,6 @@
-package main.pizzaria.entity;
-
-
-public enum Ingrediente {
-
-}
+//package main.pizzaria.entity;
+//
+//
+//public class Ingrediente{
+//
+//}

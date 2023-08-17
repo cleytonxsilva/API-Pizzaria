@@ -21,13 +21,14 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     @NotNull(message = "Nome do produto não pode ser nulo!")
     private String nome;
 
-    @NotNull(message = "Tamanho não pode ser nulo!") //PEQUENA, MEDIA, GRANDE, GIGANTE
-    private String tamanho;
-
+    @NotNull(message = "Tamanho não pode ser nulo!")
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "Ingrediente não pode ser nulo!")
-    private List<Ingrediente> ingredientes;
+    private Tamanho tamanho;
+
+//    @NotNull(message = "Ingrediente não pode ser nulo!")
+//    private List<Ingrediente> ingredientes;
 }

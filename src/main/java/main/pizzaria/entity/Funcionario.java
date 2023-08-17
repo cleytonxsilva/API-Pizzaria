@@ -19,6 +19,7 @@ public class Funcionario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     @NotNull(message = "Nome do funcionário não pode ser nulo!")
     private String nome;
 
@@ -27,6 +28,7 @@ public class Funcionario {
 
     private int telefone;
 
+    @Column(unique = true)
     @NotNull(message = "Matricula não pode ser nula!") //unique
     private int matricula;
 

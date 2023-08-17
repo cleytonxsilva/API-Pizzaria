@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
 
 @Getter
@@ -20,6 +19,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     @NotNull(message = "CPF não pode ser nulo!")
     private String cpf;
 
@@ -34,5 +34,6 @@ public class Cliente {
     @OneToMany
     @NotNull(message = "Endereço não pode ser nulo!")
     private List<Endereco> enderecos;
+
 
 }

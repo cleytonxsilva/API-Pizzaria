@@ -21,6 +21,7 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     @NotNull(message = "Número do pedido não pode ser nulo!")
     private int numeroPedido;
 
@@ -33,7 +34,7 @@ public class Pedido {
     private Cliente cliente;
 
     @OneToMany
-    @JoinColumn(name = "produtos_id")
+    @JoinTable(name = "produtos_id")
     @NotNull(message = "Produto não pode ser nulo!")
     private List<Produto> produtos;
 }
