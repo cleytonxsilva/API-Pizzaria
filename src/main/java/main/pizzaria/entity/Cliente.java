@@ -35,5 +35,4 @@ public class Cliente {
     @NotNull(message = "Endereço não pode ser nulo!")
     private List<Endereco> enderecos;
 
-
 }
