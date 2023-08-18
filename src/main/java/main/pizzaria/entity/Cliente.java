@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -31,9 +33,14 @@ public class Cliente {
     @NotNull(message = "Telefone não pode ser nulo!")
     private int telefone;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "clientes_enderecos",
+            joinColumns = @JoinColumn(name = "clientes_id"),
+            inverseJoinColumns = @JoinColumn(name = "enderecos_id")
+    )
     @NotNull(message = "Endereço não pode ser nulo!")
-    private List<Endereco> enderecos;
+    private List<Endereco> enderecos = new ArrayList<>();
 
 
 }

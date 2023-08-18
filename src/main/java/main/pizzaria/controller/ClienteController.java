@@ -20,7 +20,7 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
-    @GetMapping
+    @GetMapping("/findAll")
     public ResponseEntity <List<Cliente>> findAll(){
         try{
             return ResponseEntity.ok(clienteService.findAll());
@@ -29,6 +29,15 @@ public class ClienteController {
         }
     }
 
+    @GetMapping("/pesquisar")
+    public ResponseEntity<Cliente> findByNome(@RequestParam("nome") String nome){
+        Cliente cliente = clienteService.findByNome(nome).orElse(null);
+        if (cliente != null) {
+            return ResponseEntity.ok(cliente);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
+        }
+    }
     @GetMapping
     public ResponseEntity<Cliente> findById(@RequestParam("id") Long id) {
         Cliente cliente = clienteService.findById(id).orElse(null);
