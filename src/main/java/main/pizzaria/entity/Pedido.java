@@ -37,4 +37,14 @@ public class Pedido {
     @JoinTable(name = "produtos_id")
     @NotNull(message = "Produto não pode ser nulo!")
     private List<Produto> produtos;
+
+    @NotNull(message = "Status não pode ser nulo!")
+    @Enumerated(EnumType.STRING)
+    private Estado estado;
+
+    @NotNull(message = "Total não pode ser nulo!")
+    private double total;
+
+    @NotNull(message = "Descrição do produto obrigatório!")
+    private String descricao;
 }

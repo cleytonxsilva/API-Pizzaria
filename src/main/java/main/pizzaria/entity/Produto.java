@@ -25,10 +25,9 @@ public class Produto {
     @NotNull(message = "Nome do produto não pode ser nulo!")
     private String nome;
 
-    @NotNull(message = "Tamanho não pode ser nulo!")
     @Enumerated(EnumType.STRING)
     private Tamanho tamanho;
 
-//    @NotNull(message = "Ingrediente não pode ser nulo!")
-//    private List<Ingrediente> ingredientes;
+    @NotNull(message = "Valor não pode ser nulo!")
+    private double valor;
 }
