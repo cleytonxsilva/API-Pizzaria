@@ -1,5 +1,6 @@
 package main.pizzaria.controller;
 
+import main.pizzaria.dto.ClienteDTO;
 import main.pizzaria.entity.Cliente;
 import main.pizzaria.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,17 @@ public class ClienteController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<?> create(@RequestBody final Cliente cliente) {
+    @GetMapping
+    public ResponseEntity<Cliente> findById(@RequestParam("id") Long id) {
+        Cliente cliente = clienteService.findById(id).orElse(null);
+        if (cliente != null) {
+            return ResponseEntity.ok(cliente);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
+        }
+    }
+    @PostMapping("/cadastrar")
+    public ResponseEntity<?> create(@RequestBody final ClienteDTO cliente) {
         try {
             this.clienteService.create(cliente);
             return ResponseEntity.ok("Cliente cadastrado com sucesso");
@@ -38,7 +48,7 @@ public class ClienteController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/editar")
     public ResponseEntity<?> update(@RequestParam("nome") final String nome, @RequestBody final Cliente cliente) {
         try{
             final Cliente clienteBanco = this.clienteService.findByNome(cliente.getNome()).orElse(null);
@@ -50,6 +60,20 @@ public class ClienteController {
             return ResponseEntity.ok("Cliente editado com sucesso");
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Erro ao cadastrar cliente!", e);
+        }
+    }
+    @DeleteMapping
+    public ResponseEntity<?> delete(@RequestParam("id") final Long id){
+        try {
+            final Cliente clienteBanco = this.clienteService.findById(id).orElse(null);
+            if(clienteBanco == null){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
+            }
+            clienteService.delete(id);
+            return ResponseEntity.ok("Registro excluido com sucesso");
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Erro ao excluir cliente!", e);
         }
     }
 }

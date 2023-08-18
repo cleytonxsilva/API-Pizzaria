@@ -1,11 +1,14 @@
 package main.pizzaria.service;
 
 import jakarta.transaction.Transactional;
+import main.pizzaria.dto.ClienteDTO;
 import main.pizzaria.entity.Cliente;
+import main.pizzaria.entity.Endereco;
 import main.pizzaria.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +23,21 @@ public class ClienteService {
     }
 
     @Transactional
-    public void create(Cliente cliente) {
-        clienteRepository.save(cliente);
+    public void create(ClienteDTO cliente) {
+        Cliente novoCliente = new Cliente();
+        novoCliente.setCpf(cliente.getCpf());
+        novoCliente.setNome(cliente.getNome());
+        novoCliente.setIdade(cliente.getIdade());
+        novoCliente.setTelefone(cliente.getTelefone());
+        List<Endereco> enderecos = new ArrayList<>();
+        for(Endereco enderecoDTO : cliente.getEnderecos()){
+            Endereco novoEndereco = new Endereco();
+            enderecos.set(0, novoEndereco).setRua(enderecos.get(0).getRua());
+            enderecos.set(0, novoEndereco).setNumero(enderecos.get(0).getNumero());
+            enderecos.add(novoEndereco);
+        }
+        novoCliente.setEnderecos(enderecos);
+        clienteRepository.save(novoCliente);
     }
 
     public Optional<Cliente> findByNome(String nome) {
@@ -38,5 +54,13 @@ public class ClienteService {
         clienteBanco.setEnderecos(cliente.getEnderecos());
 
         clienteRepository.save(clienteBanco);
+    }
+
+    public Optional<Cliente> findById(Long id) {
+        return clienteRepository.findById(id);
+    }
+
+    public void delete(Long id) {
+        clienteRepository.deleteById(id);
     }
 }
