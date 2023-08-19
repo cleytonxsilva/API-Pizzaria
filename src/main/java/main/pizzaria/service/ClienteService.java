@@ -29,11 +29,15 @@ public class ClienteService {
         novoCliente.setNome(cliente.getNome());
         novoCliente.setIdade(cliente.getIdade());
         novoCliente.setTelefone(cliente.getTelefone());
+
         List<Endereco> enderecos = new ArrayList<>();
+
         for(Endereco enderecoDTO : cliente.getEnderecos()){
+
             Endereco novoEndereco = new Endereco();
-            enderecos.set(0, novoEndereco).setRua(enderecos.get(0).getRua());
-            enderecos.set(0, novoEndereco).setNumero(enderecos.get(0).getNumero());
+
+            novoEndereco.setRua(enderecoDTO.getRua());
+            novoEndereco.setNumero(enderecoDTO.getNumero());
             enderecos.add(novoEndereco);
         }
         novoCliente.setEnderecos(enderecos);
