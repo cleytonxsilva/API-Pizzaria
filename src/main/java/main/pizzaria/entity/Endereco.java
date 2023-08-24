@@ -28,7 +28,7 @@ public class Endereco {
     @NotNull
     private int numero;
 
-    @ManyToMany(mappedBy = "enderecos")
-    private List<Cliente> clientes = new ArrayList<>();
+    @ManyToOne
+    private Cliente cliente;
 
 }

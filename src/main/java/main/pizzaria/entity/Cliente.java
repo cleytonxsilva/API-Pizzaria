@@ -33,14 +33,14 @@ public class Cliente {
     @NotNull(message = "Telefone não pode ser nulo!")
     private int telefone;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "clientes_enderecos",
-            joinColumns = @JoinColumn(name = "clientes_id"),
-            inverseJoinColumns = @JoinColumn(name = "enderecos_id")
-    )
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos;
+
+    @OneToMany(mappedBy = "cliente")
     @NotNull(message = "Endereço não pode ser nulo!")
     private List<Endereco> enderecos;
+
+
 
 
 }

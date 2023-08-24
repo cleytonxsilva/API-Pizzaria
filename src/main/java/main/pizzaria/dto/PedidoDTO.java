@@ -23,7 +23,7 @@ public class PedidoDTO {
 
     private Estado estado;
 
-    private double total;
+    private double valorTotal;
 
     private String descricao;
 }

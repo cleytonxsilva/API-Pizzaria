@@ -7,33 +7,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @Entity
-@Table(name = "produtos", schema = "private")
+@Table(name = "sabores", schema = "private")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produto {
+public class Sabor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    @NotNull(message = "Nome do produto não pode ser nulo!")
     private String nome;
 
-    @Enumerated(EnumType.STRING)
-    private Tamanho tamanho;
+    @ManyToOne
+    @JoinTable(
+            name = "sabores_produtos",
+            joinColumns = @JoinColumn(name = "sabores_id"),
+            inverseJoinColumns = @JoinColumn(name = "produtos_id")
+    )
+    private Produto produtos;
 
     @NotNull(message = "Valor não pode ser nulo!")
-    private double valorProduto;
+    private double valorSabor;
 
-    @ManyToMany(mappedBy = "produtos")
-    private List<Sabor> sabores;
-
-    @ManyToMany(mappedBy = "produtos")
-    private List<Pedido> pedidos;
+    private String descricao;
 }

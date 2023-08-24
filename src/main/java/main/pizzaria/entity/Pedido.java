@@ -29,12 +29,13 @@ public class Pedido {
     private boolean entregar;
 
     @ManyToOne
-    @JoinColumn(name = "clientes_id")
     @NotNull(message = "Cliente não pode ser nulo!")
     private Cliente cliente;
 
-    @OneToMany
-    @JoinTable(name = "produtos_id")
+    @ManyToMany
+    @JoinTable(name = "pedidos_produtos",
+            joinColumns = @JoinColumn(name = "pedidos_id"),
+            inverseJoinColumns = @JoinColumn(name = "produtos_id"))
     @NotNull(message = "Produto não pode ser nulo!")
     private List<Produto> produtos;
 
@@ -43,7 +44,7 @@ public class Pedido {
     private Estado estado;
 
     @NotNull(message = "Total não pode ser nulo!")
-    private double total;
+    private double valorTotal;
 
     @NotNull(message = "Descrição do produto obrigatório!")
     private String descricao;
