@@ -48,4 +48,7 @@ public class Pedido {
 
     @NotNull(message = "Descrição do produto obrigatório!")
     private String descricao;
+
+    @ManyToMany(mappedBy = "pedidos")
+    private List<Funcionario> funcionarios;
 }

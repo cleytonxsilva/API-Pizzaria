@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -31,5 +33,8 @@ public class Funcionario {
     @Column(unique = true)
     @NotNull(message = "Matricula não pode ser nula!") //unique
     private int matricula;
+
+    @ManyToMany(mappedBy = "funcionarios")
+    private List<Pedido> pedidos;
 
 }

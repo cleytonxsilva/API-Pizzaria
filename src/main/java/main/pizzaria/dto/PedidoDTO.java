@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import main.pizzaria.entity.Cliente;
 import main.pizzaria.entity.Estado;
+import main.pizzaria.entity.Funcionario;
 import main.pizzaria.entity.Produto;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public class PedidoDTO {
     private double valorTotal;
 
     private String descricao;
+
+    private List<Funcionario> funcionarios;
 }
