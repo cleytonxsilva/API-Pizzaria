@@ -7,6 +7,7 @@ import main.pizzaria.entity.Estado;
 import main.pizzaria.entity.Funcionario;
 import main.pizzaria.entity.Produto;
 
+import java.math.BigDecimal;
 import java.util.List;
 @Getter
 @Setter
@@ -24,7 +25,7 @@ public class PedidoDTO {
 
     private Estado estado;
 
-    private double valorTotal;
+    private BigDecimal valorTotal;
 
     private String descricao;
 

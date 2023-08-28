@@ -22,11 +22,11 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(name = "rua", nullable = false, length = 50)
     private String rua;
 
-    @NotNull
-    private int numero;
+    @Column(name = "numero", nullable = false)
+    private Integer numero;
 
     @ManyToOne
     private Cliente cliente;

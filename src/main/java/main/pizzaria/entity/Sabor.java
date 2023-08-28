@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Entity
@@ -19,6 +21,7 @@ public class Sabor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "nome", nullable = false, length = 50)
     private String nome;
 
     @ManyToOne
@@ -27,10 +30,12 @@ public class Sabor {
             joinColumns = @JoinColumn(name = "sabores_id"),
             inverseJoinColumns = @JoinColumn(name = "produtos_id")
     )
+    @NotNull(message = "Produto não pode ser nulo!")
     private Produto produtos;
 
-    @NotNull(message = "Valor não pode ser nulo!")
-    private double valorSabor;
+    @Column(name = "valor_sabor", nullable = false)
+    private BigDecimal valorSabor;
 
+    @Column(name = "descricao", length = 100)
     private String descricao;
 }

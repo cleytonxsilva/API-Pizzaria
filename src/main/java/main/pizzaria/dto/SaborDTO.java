@@ -2,6 +2,8 @@ package main.pizzaria.dto;
 
 import main.pizzaria.entity.Produto;
 
+import java.math.BigDecimal;
+
 public class SaborDTO {
 
     private Long id;
@@ -10,7 +12,7 @@ public class SaborDTO {
 
     private Produto produto;
 
-    private double valorSabor;
+    private BigDecimal valorSabor;
 
     private String descricao;
 

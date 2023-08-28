@@ -16,7 +16,7 @@ public class FuncionarioDTO {
 
     private String cpf;
 
-    private int telefone;
+    private Integer telefone;
 
     private int matricula;
 

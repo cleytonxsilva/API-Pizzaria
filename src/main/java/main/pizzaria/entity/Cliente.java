@@ -21,17 +21,17 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    @NotNull(message = "CPF não pode ser nulo!")
+    @Column(name = "cpf", nullable = false, unique = true, length = 14)
     private String cpf;
 
-    @NotNull(message = "Nome não pode ser nulo!")
+    @Column(name = "nome", nullable = false, length = 50)
     private String nome;
 
+    @Column(name = "idade")
     private int idade;
 
-    @NotNull(message = "Telefone não pode ser nulo!")
-    private int telefone;
+    @Column(name = "telefone", nullable = false, length = 14)
+    private String telefone;
 
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;

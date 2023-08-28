@@ -6,6 +6,7 @@ import main.pizzaria.entity.Pedido;
 import main.pizzaria.entity.Sabor;
 import main.pizzaria.entity.Tamanho;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -18,7 +19,7 @@ public class ProdutoDTO {
 
     private Tamanho tamanho;
 
-    private double valorProduto;
+    private BigDecimal valorProduto;
 
     private List<Sabor> sabores;
 

@@ -16,7 +16,7 @@ public class EnderecoDTO {
 
     private String rua;
 
-    private int numero;
+    private Integer numero;
 
     private Cliente cliente;
 

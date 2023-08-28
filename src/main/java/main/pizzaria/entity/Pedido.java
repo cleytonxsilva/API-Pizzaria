@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -21,14 +22,14 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    @NotNull(message = "Número do pedido não pode ser nulo!")
+    @Column(name = "numero_pedido", unique = true, nullable = false)
     private int numeroPedido;
 
-    @NotNull(message = "Campo 'entrega' não pode ser nulo!")
+    @Column(name = "entregar", nullable = false)
     private boolean entregar;
 
     @ManyToOne
+    @JoinColumn(name = "cliente_id")
     @NotNull(message = "Cliente não pode ser nulo!")
     private Cliente cliente;
 
@@ -39,14 +40,14 @@ public class Pedido {
     @NotNull(message = "Produto não pode ser nulo!")
     private List<Produto> produtos;
 
-    @NotNull(message = "Status não pode ser nulo!")
+    @Column(name = "estado", nullable = false)
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
-    @NotNull(message = "Total não pode ser nulo!")
-    private double valorTotal;
+    @Column(name = "valor_total", nullable = false)
+    private BigDecimal valorTotal;
 
-    @NotNull(message = "Descrição do produto obrigatório!")
+    @Column(name = "descricao", nullable = false, length = 100)
     private String descricao;
 
     @ManyToMany(mappedBy = "pedidos")

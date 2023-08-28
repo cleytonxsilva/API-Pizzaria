@@ -23,7 +23,7 @@ public class ClienteDTO {
 
     private int idade;
 
-    private int telefone;
+    private String telefone;
 
     private List<Pedido> pedidos;
 

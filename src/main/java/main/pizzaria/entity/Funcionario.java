@@ -21,18 +21,17 @@ public class Funcionario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    @NotNull(message = "Nome do funcionário não pode ser nulo!")
+    @Column(name = "nome", nullable = false, length = 50)
     private String nome;
 
-    @NotNull(message = "CPF não pode ser nulo!")
+    @Column(name = "cpf", nullable = false, unique = true, length = 14)
     private String cpf;
 
+    @Column(name = "telefone", nullable = false, length = 14)
     private int telefone;
 
-    @Column(unique = true)
-    @NotNull(message = "Matricula não pode ser nula!") //unique
-    private int matricula;
+    @Column(unique = true, nullable = false)
+    private Integer matricula;
 
     @ManyToMany(mappedBy = "funcionarios")
     private List<Pedido> pedidos;
