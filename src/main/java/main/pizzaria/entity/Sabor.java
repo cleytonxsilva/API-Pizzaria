@@ -24,13 +24,13 @@ public class Sabor {
     @Column(name = "nome", nullable = false, length = 50)
     private String nome;
 
-    @ManyToOne
+    @ManyToMany
     @JoinTable(
             name = "sabores_produtos",
             joinColumns = @JoinColumn(name = "sabores_id"),
             inverseJoinColumns = @JoinColumn(name = "produtos_id")
     )
-    @NotNull(message = "Produto não pode ser nulo!")
+    //@NotNull(message = "Produto não pode ser nulo!")
     private Produto produtos;
 
     @Column(name = "valor_sabor", nullable = false)

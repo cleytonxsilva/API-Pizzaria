@@ -37,7 +37,7 @@ public class Cliente {
     private List<Pedido> pedidos;
 
     @OneToMany(mappedBy = "cliente")
-    @NotNull(message = "Endereço não pode ser nulo!")
+    //@NotNull(message = "Endereço não pode ser nulo!")
     private List<Endereco> enderecos;
 
 

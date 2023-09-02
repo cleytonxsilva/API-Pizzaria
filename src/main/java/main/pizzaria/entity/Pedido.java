@@ -30,14 +30,14 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
-    @NotNull(message = "Cliente não pode ser nulo!")
+    //@NotNull(message = "Cliente não pode ser nulo!")
     private Cliente cliente;
 
     @ManyToMany
     @JoinTable(name = "pedidos_produtos",
             joinColumns = @JoinColumn(name = "pedidos_id"),
             inverseJoinColumns = @JoinColumn(name = "produtos_id"))
-    @NotNull(message = "Produto não pode ser nulo!")
+    //@NotNull(message = "Produto não pode ser nulo!")
     private List<Produto> produtos;
 
     @Column(name = "estado", nullable = false)
