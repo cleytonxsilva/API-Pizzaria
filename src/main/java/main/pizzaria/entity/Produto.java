@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "produtos", schema = "private")
+@Table(name = "produtos", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Produto {
@@ -31,9 +31,12 @@ public class Produto {
     @Column(name = "valor_produto", nullable = false)
     private BigDecimal valorProduto;
 
-    @ManyToMany(mappedBy = "produtos")
+    @OneToMany(mappedBy = "produtos")
     private List<Sabor> sabores;
 
-    @ManyToMany(mappedBy = "produtos")
+    @ManyToMany
+    @JoinTable(name = "pedidos_produtos",
+            joinColumns = @JoinColumn(name = "produtos_id"),
+            inverseJoinColumns = @JoinColumn(name = "pedidos_id"))
     private List<Pedido> pedidos;
 }

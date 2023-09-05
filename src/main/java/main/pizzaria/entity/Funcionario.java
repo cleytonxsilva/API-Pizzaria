@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "funcionarios", schema = "private")
+@Table(name = "funcionarios", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Funcionario {
@@ -33,7 +33,7 @@ public class Funcionario {
     @Column(unique = true, nullable = false)
     private Integer matricula;
 
-    @ManyToMany(mappedBy = "funcionarios")
+    @OneToMany(mappedBy = "funcionario")
     private List<Pedido> pedidos;
 
 }

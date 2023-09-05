@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-@Table(name = "sabores", schema = "private")
+@Table(name = "sabores", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Sabor {
@@ -24,13 +24,8 @@ public class Sabor {
     @Column(name = "nome", nullable = false, length = 50)
     private String nome;
 
-    @ManyToMany
-    @JoinTable(
-            name = "sabores_produtos",
-            joinColumns = @JoinColumn(name = "sabores_id"),
-            inverseJoinColumns = @JoinColumn(name = "produtos_id")
-    )
-    //@NotNull(message = "Produto não pode ser nulo!")
+    @ManyToOne
+    @JoinColumn(name = "produtos_id", nullable = false)
     private Produto produtos;
 
     @Column(name = "valor_sabor", nullable = false)

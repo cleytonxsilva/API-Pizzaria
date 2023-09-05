@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "enderecos", schema = "private")
+@Table(name = "enderecos", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Endereco {
@@ -29,6 +29,7 @@ public class Endereco {
     private Integer numero;
 
     @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "pedidos", schema = "private")
+@Table(name = "pedidos", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Pedido {
@@ -33,11 +33,7 @@ public class Pedido {
     //@NotNull(message = "Cliente não pode ser nulo!")
     private Cliente cliente;
 
-    @ManyToMany
-    @JoinTable(name = "pedidos_produtos",
-            joinColumns = @JoinColumn(name = "pedidos_id"),
-            inverseJoinColumns = @JoinColumn(name = "produtos_id"))
-    //@NotNull(message = "Produto não pode ser nulo!")
+    @ManyToMany(mappedBy = "pedidos")
     private List<Produto> produtos;
 
     @Column(name = "estado", nullable = false)
@@ -50,6 +46,7 @@ public class Pedido {
     @Column(name = "descricao", nullable = false, length = 100)
     private String descricao;
 
-    @ManyToMany(mappedBy = "pedidos")
-    private List<Funcionario> funcionarios;
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
+    private Funcionario funcionario;
 }

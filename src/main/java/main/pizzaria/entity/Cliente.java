@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "clientes", schema = "private")
+@Table(name = "clientes", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cliente {
@@ -37,7 +37,6 @@ public class Cliente {
     private List<Pedido> pedidos;
 
     @OneToMany(mappedBy = "cliente")
-    //@NotNull(message = "Endereço não pode ser nulo!")
     private List<Endereco> enderecos;
 
 
