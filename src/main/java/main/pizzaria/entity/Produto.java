@@ -1,11 +1,11 @@
 package main.pizzaria.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import main.pizzaria.entity.enums.Tamanho;
 
 import java.math.BigDecimal;
 import java.util.List;

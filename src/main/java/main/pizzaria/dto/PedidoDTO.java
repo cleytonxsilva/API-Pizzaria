@@ -3,7 +3,7 @@ package main.pizzaria.dto;
 import lombok.Getter;
 import lombok.Setter;
 import main.pizzaria.entity.Cliente;
-import main.pizzaria.entity.Estado;
+import main.pizzaria.entity.enums.Estado;
 import main.pizzaria.entity.Funcionario;
 import main.pizzaria.entity.Produto;
 

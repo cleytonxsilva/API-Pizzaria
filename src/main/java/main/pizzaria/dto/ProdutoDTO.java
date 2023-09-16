@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import main.pizzaria.entity.Pedido;
 import main.pizzaria.entity.Sabor;
-import main.pizzaria.entity.Tamanho;
+import main.pizzaria.entity.enums.Tamanho;
 
 import java.math.BigDecimal;
 import java.util.List;
