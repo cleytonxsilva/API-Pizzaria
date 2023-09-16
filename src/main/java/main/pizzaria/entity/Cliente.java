@@ -39,7 +39,12 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos;
 
-
-
-
+    public Cliente(String cpf, String nome, int idade, String telefone, List<Pedido> pedidos, List<Endereco> enderecos) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.idade = idade;
+        this.telefone = telefone;
+        this.pedidos = pedidos;
+        this.enderecos = enderecos;
+    }
 }

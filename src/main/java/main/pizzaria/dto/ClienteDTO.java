@@ -1,9 +1,9 @@
 package main.pizzaria.dto;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import main.pizzaria.entity.Cliente;
 import main.pizzaria.entity.Endereco;
 import main.pizzaria.entity.Pedido;
 
@@ -12,8 +12,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class ClienteDTO {
     private Long id;
 
@@ -29,4 +27,7 @@ public class ClienteDTO {
 
     private List<Endereco> enderecos;
 
+    public Cliente transformObject(){
+        return new Cliente(nome, cpf, idade, telefone, pedidos, enderecos);
+    }
 }

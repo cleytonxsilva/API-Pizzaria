@@ -6,12 +6,12 @@ import main.pizzaria.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
@@ -30,25 +30,17 @@ public class ClienteController {
     }
 
     @GetMapping("/pesquisar")
-    public ResponseEntity<Cliente> findByNome(@RequestParam("nome") String nome){
-        Cliente cliente = clienteService.findByNome(nome).orElse(null);
-        if (cliente != null) {
+    public ResponseEntity<Optional<Cliente>> findByNome(@RequestParam("nome") String nome){
+        Optional<Cliente> cliente = clienteService.findByNome(nome);
+        if (cliente.isPresent()) {
             return ResponseEntity.ok(cliente);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
         }
     }
-    @GetMapping
-    public ResponseEntity<Cliente> findById(@RequestParam("id") Long id) {
-        Cliente cliente = clienteService.findById(id).orElse(null);
-        if (cliente != null) {
-            return ResponseEntity.ok(cliente);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
-        }
-    }
+
     @PostMapping("/cadastrar")
-    public ResponseEntity<?> create(@RequestBody final ClienteDTO cliente) {
+    public ResponseEntity<String> create(@RequestBody final ClienteDTO cliente) {
         try {
             this.clienteService.create(cliente);
             return ResponseEntity.ok("Cliente cadastrado com sucesso");
@@ -58,7 +50,7 @@ public class ClienteController {
     }
 
     @PutMapping("/editar")
-    public ResponseEntity<?> update(@RequestParam("nome") final String nome, @RequestBody final Cliente cliente) {
+    public ResponseEntity<String> update(@RequestParam("nome") final String nome, @RequestBody final Cliente cliente) {
         try{
             final Cliente clienteBanco = this.clienteService.findByNome(cliente.getNome()).orElse(null);
             if(clienteBanco == null)
@@ -72,7 +64,7 @@ public class ClienteController {
         }
     }
     @DeleteMapping
-    public ResponseEntity<?> delete(@RequestParam("id") final Long id){
+    public ResponseEntity<String> delete(@RequestParam("id") final Long id){
         try {
             final Cliente clienteBanco = this.clienteService.findById(id).orElse(null);
             if(clienteBanco == null){

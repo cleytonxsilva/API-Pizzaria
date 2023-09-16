@@ -24,7 +24,7 @@ public class ClienteService {
 
     @Transactional
     public void create(ClienteDTO cliente) {
-        Cliente novoCliente = new Cliente();
+        Cliente novoCliente = new ClienteDTO().transformObject();
         novoCliente.setCpf(cliente.getCpf());
         novoCliente.setNome(cliente.getNome());
         novoCliente.setIdade(cliente.getIdade());
