@@ -29,11 +29,16 @@ class PizzariaApplicationTests {
 
 	@BeforeEach
 	void injectData() {
-		// Simule o comportamento do clienteRepository.findAll() aqui
 		List<Cliente> clientes = new ArrayList<>();
 		clientes.add(new Cliente("12345678900", "Cleyton", 26, "123456789", new ArrayList<>(1), new ArrayList<>(1)));
 		clientes.add(new Cliente("98765432100", "João", 30, "987654321", new ArrayList<>(1), new ArrayList<>(1)));
 		Mockito.when(clienteRepository.findAll()).thenReturn(clientes);
+
+		String nomeProcurado = "Cleyton";
+		Optional<Cliente> clienteCleyton = clientes.stream()
+				.filter(cliente -> nomeProcurado.equals(cliente.getNome()))
+				.findFirst();
+		Mockito.when(clienteRepository.findByNome(nomeProcurado)).thenReturn(clienteCleyton);
 	}
 
 
