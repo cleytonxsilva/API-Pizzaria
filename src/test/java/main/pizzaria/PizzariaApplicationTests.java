@@ -39,7 +39,7 @@ class PizzariaApplicationTests {
 
 	@Test
 	@DisplayName("Caso de Uso FindByName Classe Cliente")
-	void testFindByNamePessoaTest(){
+	void testFindByNameClienteTest(){
 		ResponseEntity<Optional<Cliente>> responseEntity = clienteController.findByNome("Cleyton");
 		Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 		String nome = responseEntity.getBody().orElseThrow().getNome();
