@@ -47,4 +47,5 @@ public class Cliente {
         this.pedidos = pedidos;
         this.enderecos = enderecos;
     }
+
 }
