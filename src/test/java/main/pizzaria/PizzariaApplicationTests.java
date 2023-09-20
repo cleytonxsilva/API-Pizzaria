@@ -49,7 +49,7 @@ class PizzariaApplicationTests {
 
 	@Test
 	@DisplayName("Caso de Uso FindAll Classe Cliente")
-	void testFindAllClientes() {
+	void testFindAllClientesTest() {
 		ResponseEntity<List<Cliente>> responseEntity = clienteController.findAll();
 		Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 		List<Cliente> clientes = responseEntity.getBody();
