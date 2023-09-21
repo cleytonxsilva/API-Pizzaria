@@ -63,7 +63,7 @@ public class ClienteController {
     public ResponseEntity<String> update(@RequestParam("nome") final String nome, @RequestBody final Cliente cliente) {
         try{
             final Cliente clienteBanco = this.clienteService.findByNome(cliente.getNome()).orElse(null);
-            if(clienteBanco == null)
+            if(clienteBanco != cliente)
             {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Não foi possível identificar o registro informado");
             }

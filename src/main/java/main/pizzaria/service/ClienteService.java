@@ -50,9 +50,7 @@ public class ClienteService {
 
     @Transactional
     public void update(String nome, Cliente cliente) {
-        Cliente clienteBanco = findByNome(nome).orElseThrow(() ->
-                new RuntimeException("Cliente não encontrado: " + nome)
-        );
+        Cliente clienteBanco = findByNome(nome).orElse(null);
         clienteBanco.setNome(cliente.getNome());
         clienteBanco.setTelefone(cliente.getTelefone());
         clienteBanco.setEnderecos(cliente.getEnderecos());
