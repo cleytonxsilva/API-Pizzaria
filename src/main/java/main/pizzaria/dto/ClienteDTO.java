@@ -27,7 +27,8 @@ public class ClienteDTO {
 
     private List<Endereco> enderecos;
 
+
     public Cliente transformObject(){
-        return new Cliente(nome, cpf, idade, telefone, pedidos, enderecos);
+        return new Cliente(cpf, nome, idade, telefone, pedidos, enderecos);
     }
 }

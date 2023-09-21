@@ -20,13 +20,23 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
-    @GetMapping("/findAll")
+    @GetMapping("/listar")
     public ResponseEntity <List<Cliente>> findAll(){
         try{
             return ResponseEntity.ok(clienteService.findAll());
         }catch (DataIntegrityViolationException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Erro ao consultar a lista de clientes!", e);
         }
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<Cliente> findById(@RequestParam("id") final Long id){
+        try {
+            return ResponseEntity.ok(clienteService.findById(id).orElse(null));
+        }catch (DataIntegrityViolationException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ID não encontrado!", e);
+        }
+
     }
 
     @GetMapping("/pesquisar")
@@ -55,7 +65,7 @@ public class ClienteController {
             final Cliente clienteBanco = this.clienteService.findByNome(cliente.getNome()).orElse(null);
             if(clienteBanco == null)
             {
-                throw new RuntimeException("Não foi possível identificar o registro informado");
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Não foi possível identificar o registro informado");
             }
             this.clienteService.update(nome, clienteBanco);//parametros errados?
             return ResponseEntity.ok("Cliente editado com sucesso");
