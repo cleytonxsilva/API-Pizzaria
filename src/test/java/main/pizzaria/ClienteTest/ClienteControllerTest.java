@@ -1,7 +1,6 @@
 package main.pizzaria.ClienteTest;
 
 import main.pizzaria.controller.ClienteController;
-import main.pizzaria.dto.ClienteDTO;
 import main.pizzaria.entity.Cliente;
 import main.pizzaria.repository.ClienteRepository;
 import org.junit.jupiter.api.Assertions;
@@ -12,16 +11,16 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @SpringBootTest
-public class ClienteControllerTest {
+class ClienteControllerTest {
     @MockBean
     ClienteRepository clienteRepository;
 
@@ -44,7 +43,7 @@ public class ClienteControllerTest {
 
     @Test
     @DisplayName("Caso de Uso FindById")
-    void testFindById() {
+    void findByIdTest() {
         Long clienteId = 1L;
 
         Cliente cliente = new Cliente("12345678900", "Cleyton", 26, "123456789", new ArrayList<>(1), new ArrayList<>(1));
@@ -56,20 +55,31 @@ public class ClienteControllerTest {
 
     @Test
     @DisplayName("Caso de Uso FindByName Classe Cliente")
-    void testFindByNameClienteTest(){
+    void findByNomeClienteTest(){
         ResponseEntity<Optional<Cliente>> responseEntity = clienteController.findByNome("Cleyton");
         Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         String nome = responseEntity.getBody().orElseThrow().getNome();
         System.out.println(nome);
         Assertions.assertEquals("Cleyton", nome);
     }
+    @Test
+    @DisplayName("Caso de Uso FindByName Cliente não encontrado")
+    void findByNomeNotFoundTest() {
+        String nomeInexistente = "NomeInexistente";
+        Mockito.when(clienteRepository.findByNome(nomeInexistente)).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(ResponseStatusException.class, () -> {
+            clienteController.findByNome(nomeInexistente);
+        });
+    }
 
     @Test
     @DisplayName("Caso de Uso FindAll Classe Cliente")
-    void testFindAllClientesTest() {
+    void findAllClientesTest() {
         ResponseEntity<List<Cliente>> responseEntity = clienteController.findAll();
         Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         List<Cliente> clientes = responseEntity.getBody();
+        assert clientes != null;
         Assertions.assertFalse(clientes.isEmpty());
 
         Cliente primeiroCliente = clientes.get(0);
@@ -84,5 +94,16 @@ public class ClienteControllerTest {
         Assertions.assertEquals("João", segundoCliente.getNome());
         System.out.println(segundoCliente.getNome());
     }
+
+    @Test
+    @DisplayName("Caso de Uso FindAll com Erro de Banco de Dados")
+    void findAllWithDatabaseErrorTest() {
+        Mockito.when(clienteRepository.findAll()).thenThrow(new DataIntegrityViolationException("Erro de banco de dados"));
+
+        Assertions.assertThrows(ResponseStatusException.class, () -> {
+            clienteController.findAll();
+        });
+    }
+
 
 }

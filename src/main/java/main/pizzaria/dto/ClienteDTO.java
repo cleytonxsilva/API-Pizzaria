@@ -6,8 +6,6 @@ import lombok.Setter;
 import main.pizzaria.entity.Cliente;
 import main.pizzaria.entity.Endereco;
 import main.pizzaria.entity.Pedido;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
