@@ -35,4 +35,11 @@ public class Funcionario {
     @OneToMany(mappedBy = "funcionario")
     private List<Pedido> pedidos;
 
+    public Funcionario(String nome, String cpf, Integer telefone, int matricula, List<Pedido> pedidos) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.matricula = matricula;
+        this.pedidos = pedidos;
+    }
 }

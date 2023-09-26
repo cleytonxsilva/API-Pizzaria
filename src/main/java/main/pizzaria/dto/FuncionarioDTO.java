@@ -2,6 +2,7 @@ package main.pizzaria.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import main.pizzaria.entity.Funcionario;
 import main.pizzaria.entity.Pedido;
 
 import java.util.List;
@@ -21,4 +22,8 @@ public class FuncionarioDTO {
     private int matricula;
 
     private List<Pedido> pedidos;
+
+    public Funcionario transformObject() {
+        return new Funcionario(nome, cpf, telefone, matricula, pedidos);
+    }
 }
