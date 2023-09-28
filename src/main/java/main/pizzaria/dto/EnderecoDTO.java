@@ -4,6 +4,7 @@ package main.pizzaria.dto;
 import lombok.Getter;
 import lombok.Setter;
 import main.pizzaria.entity.Cliente;
+import main.pizzaria.entity.Endereco;
 
 @Getter
 @Setter
@@ -17,4 +18,7 @@ public class EnderecoDTO {
 
     private Cliente cliente;
 
+    public Endereco transformObject() {
+        return new Endereco(rua, numero, cliente);
+    }
 }

@@ -57,4 +57,33 @@ public class FuncionarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Erro ao cadastrar funcionario!", e);
         }
     }
+
+    @PutMapping("/editar")
+    public ResponseEntity<String> update(@RequestParam("nome") final String nome, @RequestBody final Funcionario funcionario) {
+        try{
+            final Funcionario funcionarioBanco = this.funcionarioService.findByNome(funcionario.getNome()).orElse(null);
+            if(funcionarioBanco != funcionario)
+            {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Não foi possível identificar o registro informado");
+            }
+            this.funcionarioService.update(nome, funcionarioBanco);//parametros errados?
+            return ResponseEntity.ok("Funcionario editado com sucesso");
+        } catch (DataIntegrityViolationException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Erro ao editar cadastro!", e);
+        }
+    }
+    @DeleteMapping
+    public ResponseEntity<String> delete(@RequestParam("id") final Long id){
+        try {
+            final Funcionario funcionarioBanco = this.funcionarioService.findById(id).orElse(null);
+            if(funcionarioBanco == null){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionario não encontrado");
+            }
+            funcionarioService.delete(id);
+            return ResponseEntity.ok("Registro excluido com sucesso");
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Erro ao excluir cadastro de funcionario!", e);
+        }
+    }
 }

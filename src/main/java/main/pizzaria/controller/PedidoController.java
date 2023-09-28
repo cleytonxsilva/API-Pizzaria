@@ -1,14 +1,71 @@
 package main.pizzaria.controller;
 
+import main.pizzaria.dto.PedidoDTO;
+import main.pizzaria.entity.Pedido;
 import main.pizzaria.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoController {
 
     @Autowired
-    PedidoService pedidoService;
+    private PedidoService pedidoService;
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<Pedido>> findAll() {
+        try {
+            return ResponseEntity.ok(pedidoService.findAll());
+        } catch (DataIntegrityViolationException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erro ao consultar a lista de pedidos!", e);
+        }
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<Pedido> findById(@RequestParam("id") final Long id) {
+        try {
+            return ResponseEntity.ok(pedidoService.findById(id).orElse(null));
+        } catch (DataIntegrityViolationException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ID não encontrado!", e);
+        }
+    }
+
+    @PostMapping("/cadastrar")
+    public ResponseEntity<String> create(@RequestBody final PedidoDTO pedidoDTO) {
+        try {
+            pedidoService.create(pedidoDTO);
+            return ResponseEntity.ok("Pedido cadastrado com sucesso");
+        } catch (DataIntegrityViolationException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erro ao cadastrar pedido!", e);
+        }
+    }
+
+    @PutMapping("/editar")
+    public ResponseEntity<String> update(@RequestParam("id") final Long id, @RequestBody final PedidoDTO pedidoDTO) {
+        try {
+            pedidoService.update(id, pedidoDTO);
+            return ResponseEntity.ok("Pedido editado com sucesso");
+        } catch (DataIntegrityViolationException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erro ao editar pedido!", e);
+        }
+    }
+
+    @DeleteMapping("/excluir")
+    public ResponseEntity<String> delete(@RequestParam("id") final Long id) {
+        try {
+            pedidoService.delete(id);
+            return ResponseEntity.ok("Pedido excluído com sucesso");
+        } catch (DataIntegrityViolationException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erro ao excluir pedido!", e);
+        }
+    }
 }
+
+

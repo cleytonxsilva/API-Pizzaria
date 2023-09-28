@@ -1,9 +1,12 @@
 package main.pizzaria.dto;
 
+import lombok.Getter;
+import lombok.Setter;
 import main.pizzaria.entity.Produto;
 
 import java.math.BigDecimal;
-
+@Getter
+@Setter
 public class SaborDTO {
 
     private Long id;
@@ -15,6 +18,4 @@ public class SaborDTO {
     private BigDecimal valorSabor;
 
     private String descricao;
-
-
 }

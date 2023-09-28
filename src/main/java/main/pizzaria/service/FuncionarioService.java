@@ -39,6 +39,19 @@ public class FuncionarioService {
         novoFuncionario.setPedidos(funcionario.getPedidos());
 
         funcionarioRepository.save(novoFuncionario);
+    }
 
+    @Transactional
+    public void update(String nome, Funcionario funcionario) {
+        Funcionario funcionarioBanco = findByNome(nome).orElse(null);
+        funcionarioBanco.setNome(funcionario.getNome());
+        funcionarioBanco.setTelefone(funcionario.getTelefone());
+        funcionarioBanco.setMatricula(funcionario.getMatricula());
+
+        funcionarioRepository.save(funcionarioBanco);
+    }
+
+    public void delete(Long id) {
+        funcionarioRepository.deleteById(id);
     }
 }

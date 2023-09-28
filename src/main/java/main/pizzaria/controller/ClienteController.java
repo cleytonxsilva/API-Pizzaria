@@ -84,7 +84,7 @@ public class ClienteController {
             return ResponseEntity.ok("Registro excluido com sucesso");
         }
         catch (DataIntegrityViolationException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Erro ao excluir cliente!", e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Erro ao excluir cadastro de cliente!", e);
         }
     }
 }
