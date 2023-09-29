@@ -60,17 +60,21 @@ public class ClienteController {
     }
 
     @PutMapping("/editar")
-    public ResponseEntity<String> update(@RequestParam("nome") final String nome, @RequestBody final Cliente cliente) {
-        try{
-            final Cliente clienteBanco = this.clienteService.findByNome(cliente.getNome()).orElse(null);
-            if(clienteBanco != cliente)
-            {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Não foi possível identificar o registro informado");
+    public ResponseEntity<String> update(@RequestParam("nome") final Long id, @RequestBody final ClienteDTO clienteDTO) {
+        try {
+
+            Optional<Cliente> clienteBancoOptional = clienteService.findById(id);
+
+
+            if (clienteBancoOptional.isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
             }
-            this.clienteService.update(nome, clienteBanco);//parametros errados?
+            Cliente clienteBanco = clienteBancoOptional.get();
+
+            clienteService.update(id, clienteBanco);
             return ResponseEntity.ok("Cliente editado com sucesso");
         } catch (DataIntegrityViolationException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Erro ao cadastrar cliente!", e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erro ao atualizar cliente", e);
         }
     }
     @DeleteMapping

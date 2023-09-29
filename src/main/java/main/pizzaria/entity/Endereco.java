@@ -29,5 +29,8 @@ public class Endereco {
     private Cliente cliente;
 
     public Endereco(String rua, Integer numero, Cliente cliente) {
+        this.rua = rua;
+        this.numero = numero;
+        this.cliente = cliente;
     }
 }

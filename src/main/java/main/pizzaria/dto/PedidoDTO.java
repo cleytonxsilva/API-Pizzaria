@@ -3,6 +3,7 @@ package main.pizzaria.dto;
 import lombok.Getter;
 import lombok.Setter;
 import main.pizzaria.entity.Cliente;
+import main.pizzaria.entity.Pedido;
 import main.pizzaria.entity.enums.Estado;
 import main.pizzaria.entity.Funcionario;
 import main.pizzaria.entity.Produto;
@@ -30,4 +31,8 @@ public class PedidoDTO {
     private String descricao;
 
     private List<Funcionario> funcionarios;
+
+    public Pedido transformObject() {
+        return new Pedido(numeroPedido, entregar, cliente, produtos, estado, valorTotal, descricao, funcionarios);
+    }
 }

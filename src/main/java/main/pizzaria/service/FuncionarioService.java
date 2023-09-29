@@ -44,6 +44,7 @@ public class FuncionarioService {
     @Transactional
     public void update(String nome, Funcionario funcionario) {
         Funcionario funcionarioBanco = findByNome(nome).orElse(null);
+        assert funcionarioBanco != null;
         funcionarioBanco.setNome(funcionario.getNome());
         funcionarioBanco.setTelefone(funcionario.getTelefone());
         funcionarioBanco.setMatricula(funcionario.getMatricula());
