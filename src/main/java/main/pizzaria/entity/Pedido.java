@@ -29,8 +29,7 @@ public class Pedido {
     private boolean entregar;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    //@NotNull(message = "Cliente não pode ser nulo!")
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
     @ManyToMany(mappedBy = "pedidos")
@@ -48,9 +47,9 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
-    private Funcionario funcionario;
+    private List<Funcionario> funcionarios;
 
-    public Pedido(int numeroPedido, boolean entregar, Cliente cliente, List<Produto> produtos, Estado estado, BigDecimal valorTotal, String descricao, Funcionario funcionario) {
+    public Pedido(int numeroPedido, boolean entregar, Cliente cliente, List<Produto> produtos, Estado estado, BigDecimal valorTotal, String descricao, List<Funcionario> funcionarios) {
         this.numeroPedido = numeroPedido;
         this.entregar = entregar;
         this.cliente = cliente;
@@ -58,6 +57,6 @@ public class Pedido {
         this.estado = estado;
         this.valorTotal = valorTotal;
         this.descricao = descricao;
-        this.funcionario = funcionario;
+        this.funcionarios = funcionarios;
     }
 }
