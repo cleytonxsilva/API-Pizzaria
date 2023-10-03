@@ -24,12 +24,19 @@ public class Sabor {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "produtos_id", nullable = false)
-    private Produto produtos;
+    @JoinColumn(name = "produtos_id")
+    private Produto produto;
 
     @Column(name = "valor_sabor", nullable = false)
     private BigDecimal valorSabor;
 
     @Column(name = "descricao", length = 100)
     private String descricao;
+
+    public Sabor(String nome, Produto produto, BigDecimal valorSabor, String descricao) {
+        this.nome = nome;
+        this.produto = produto;
+        this.valorSabor = valorSabor;
+        this.descricao = descricao;
+    }
 }

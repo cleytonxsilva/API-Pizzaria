@@ -33,16 +33,17 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Endereco> enderecos;
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
 
-    public Cliente(String cpf, String nome, int idade, String telefone, List<Pedido> pedidos, List<Endereco> enderecos) {
+    public Cliente(String cpf, String nome, int idade, String telefone, List<Pedido> pedidos, Endereco endereco) {
         this.cpf = cpf;
         this.nome = nome;
         this.idade = idade;
         this.telefone = telefone;
         this.pedidos = pedidos;
-        this.enderecos = enderecos;
+        this.endereco = endereco;
     }
 
 }

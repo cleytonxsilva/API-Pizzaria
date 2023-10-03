@@ -3,6 +3,7 @@ package main.pizzaria.service;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import main.pizzaria.dto.ClienteDTO;
+import main.pizzaria.dto.EnderecoDTO;
 import main.pizzaria.entity.Cliente;
 import main.pizzaria.entity.Endereco;
 import main.pizzaria.repository.ClienteRepository;
@@ -26,36 +27,20 @@ public class ClienteService {
     }
 
     @Transactional
-    public void create(ClienteDTO cliente) {
-        Assertions.assertNotNull(cliente.getCpf(), "CPF não pode ser nulo");
-        Assertions.assertNotNull(cliente.getNome(), "Nome não pode ser nulo");
-        Assertions.assertNotNull(cliente.getTelefone(), "Telefone não pode ser nulo");
+    public void create(ClienteDTO clienteDTO) {
+        Assertions.assertNotNull(clienteDTO.getCpf(), "CPF não pode ser nulo");
+        Assertions.assertNotNull(clienteDTO.getNome(), "Nome não pode ser nulo");
+        Assertions.assertNotNull(clienteDTO.getTelefone(), "Telefone não pode ser nulo");
 
-        Cliente novoCliente = new ClienteDTO().transformObject();
-        novoCliente.setCpf(cliente.getCpf());
-        novoCliente.setNome(cliente.getNome());
-        novoCliente.setIdade(cliente.getIdade());
-        novoCliente.setTelefone(cliente.getTelefone());
-
-        List<Endereco> enderecos = new ArrayList<>();
-
-        for (Endereco endereco : cliente.getEnderecos()) {
-            Assertions.assertNotNull(endereco, "Endereço não pode ser nulo");
-            Assertions.assertNotNull(endereco.getRua(), "Rua do endereço não pode ser nula");
-            Assertions.assertNotNull(endereco.getNumero(), "Número do endereço não pode ser nulo");
-
-            Endereco novoEndereco = new Endereco();
-            novoEndereco.setRua(endereco.getRua());
-            novoEndereco.setNumero(endereco.getNumero());
-            enderecos.add(novoEndereco);
-        }
-
-        Assert.isTrue(!enderecos.isEmpty(), "O cliente deve ter pelo menos um endereço.");
-
-        novoCliente.setEnderecos(enderecos);
-
+        Cliente novoCliente = new Cliente();
+        novoCliente.setCpf(clienteDTO.getCpf());
+        novoCliente.setNome(clienteDTO.getNome());
+        novoCliente.setIdade(clienteDTO.getIdade());
+        novoCliente.setTelefone(clienteDTO.getTelefone());
+        novoCliente.setEndereco(clienteDTO.getEndereco());
         clienteRepository.save(novoCliente);
     }
+
 
     public Optional<Cliente> findByNome(String nome) {
         return clienteRepository.findByNome(nome);
@@ -75,22 +60,22 @@ public class ClienteService {
         clienteBanco.setIdade(clienteDTO.getIdade());
         clienteBanco.setTelefone(clienteDTO.getTelefone());
 
-        List<Endereco> enderecos = new ArrayList<>();
-
-        for (Endereco endereco : clienteDTO.getEnderecos()) {
-            Assert.notNull(endereco, "Endereço não pode ser nulo");
-            Assert.notNull(endereco.getRua(), "Rua do endereço não pode ser nula");
-            Assert.notNull(endereco.getNumero(), "Número do endereço não pode ser nulo");
-
-            Endereco novoEndereco = new Endereco();
-            novoEndereco.setRua(endereco.getRua());
-            novoEndereco.setNumero(endereco.getNumero());
-            enderecos.add(novoEndereco);
-        }
-
-        Assert.isTrue(!enderecos.isEmpty(), "O cliente deve ter pelo menos um endereço.");
-
-        clienteBanco.setEnderecos(enderecos);
+//        List<Endereco> enderecos = new ArrayList<>();
+//
+//        for (Endereco endereco : clienteDTO.getEnderecos()) {
+//            Assert.notNull(endereco, "Endereço não pode ser nulo");
+//            Assert.notNull(endereco.getRua(), "Rua do endereço não pode ser nula");
+//            Assert.notNull(endereco.getNumero(), "Número do endereço não pode ser nulo");
+//
+//            Endereco novoEndereco = new Endereco();
+//            novoEndereco.setRua(endereco.getRua());
+//            novoEndereco.setNumero(endereco.getNumero());
+//            enderecos.add(novoEndereco);
+//        }
+//
+//        Assert.isTrue(!enderecos.isEmpty(), "O cliente deve ter pelo menos um endereço.");
+//
+//        clienteBanco.setEnderecos(enderecos);
 
         clienteRepository.save(clienteBanco);
     }

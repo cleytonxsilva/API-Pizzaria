@@ -36,7 +36,7 @@ public class PedidoService {
         Assertions.assertNotNull(pedidoDTO.getEstado(), "Estado não pode ser nulo");
         Assertions.assertNotNull(pedidoDTO.getValorTotal(), "Valor total não pode ser nulo");
         Assertions.assertNotNull(pedidoDTO.getDescricao(), "Descrição não pode ser nulo");
-        Assertions.assertNotNull(pedidoDTO.getFuncionarios(), "Funcionario não pode ser nulo");
+        Assertions.assertNotNull(pedidoDTO.getFuncionario(), "Funcionario não pode ser nulo");
 
         Pedido novoPedido = pedidoDTO.transformObject();
 
@@ -67,7 +67,7 @@ public class PedidoService {
         pedidoExistente.setEstado(pedidoDTO.getEstado());
         pedidoExistente.setValorTotal(pedidoDTO.getValorTotal());
         pedidoExistente.setDescricao(pedidoDTO.getDescricao());
-        pedidoExistente.setFuncionarios(pedidoDTO.getFuncionarios());
+        pedidoExistente.setFuncionario(pedidoDTO.getFuncionario());
 
         pedidoRepository.save(pedidoExistente);
     }

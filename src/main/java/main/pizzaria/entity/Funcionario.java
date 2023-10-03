@@ -27,7 +27,7 @@ public class Funcionario {
     private String cpf;
 
     @Column(name = "telefone", nullable = false, length = 14)
-    private int telefone;
+    private Integer telefone;
 
     @Column(unique = true, nullable = false)
     private Integer matricula;

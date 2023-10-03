@@ -24,13 +24,8 @@ public class Endereco {
     @Column(name = "numero", nullable = false)
     private Integer numero;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente;
-
     public Endereco(String rua, Integer numero, Cliente cliente) {
         this.rua = rua;
         this.numero = numero;
-        this.cliente = cliente;
     }
 }

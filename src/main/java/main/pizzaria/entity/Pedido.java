@@ -47,9 +47,9 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
-    private List<Funcionario> funcionarios;
+    private Funcionario funcionario;
 
-    public Pedido(int numeroPedido, boolean entregar, Cliente cliente, List<Produto> produtos, Estado estado, BigDecimal valorTotal, String descricao, List<Funcionario> funcionarios) {
+    public Pedido(int numeroPedido, boolean entregar, Cliente cliente, List<Produto> produtos, Estado estado, BigDecimal valorTotal, String descricao, Funcionario funcionario) {
         this.numeroPedido = numeroPedido;
         this.entregar = entregar;
         this.cliente = cliente;
@@ -57,6 +57,6 @@ public class Pedido {
         this.estado = estado;
         this.valorTotal = valorTotal;
         this.descricao = descricao;
-        this.funcionarios = funcionarios;
+        this.funcionario = funcionario;
     }
 }

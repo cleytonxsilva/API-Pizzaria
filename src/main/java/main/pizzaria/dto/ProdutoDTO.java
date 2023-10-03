@@ -3,6 +3,7 @@ package main.pizzaria.dto;
 import lombok.Getter;
 import lombok.Setter;
 import main.pizzaria.entity.Pedido;
+import main.pizzaria.entity.Produto;
 import main.pizzaria.entity.Sabor;
 import main.pizzaria.entity.enums.Tamanho;
 
@@ -24,4 +25,8 @@ public class ProdutoDTO {
     private List<Sabor> sabores;
 
     private List<Pedido> pedidos;
+
+    public Produto transformObject() {
+        return new Produto(nome, tamanho, valorProduto, sabores, pedidos);
+    }
 }

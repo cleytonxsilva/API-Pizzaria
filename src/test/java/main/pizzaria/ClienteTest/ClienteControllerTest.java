@@ -2,6 +2,7 @@ package main.pizzaria.ClienteTest;
 
 import main.pizzaria.controller.ClienteController;
 import main.pizzaria.entity.Cliente;
+import main.pizzaria.entity.Endereco;
 import main.pizzaria.repository.ClienteRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,8 +31,8 @@ class ClienteControllerTest {
     @BeforeEach
     void injectData() {
         List<Cliente> clientes = new ArrayList<>();
-        clientes.add(new Cliente("12345678900", "Cleyton", 26, "123456789", new ArrayList<>(1), new ArrayList<>(1)));
-        clientes.add(new Cliente("98765432100", "João", 30, "987654321", new ArrayList<>(1), new ArrayList<>(1)));
+        clientes.add(new Cliente("12345678900", "Cleyton", 26, "123456789", new ArrayList<>(1), new Endereco()));
+        clientes.add(new Cliente("98765432100", "João", 30, "987654321", new ArrayList<>(1), new Endereco()));
         Mockito.when(clienteRepository.findAll()).thenReturn(clientes);
 
         String nomeProcurado = "Cleyton";
@@ -46,7 +47,7 @@ class ClienteControllerTest {
     void findByIdTest() {
         Long clienteId = 1L;
 
-        Cliente cliente = new Cliente("12345678900", "Cleyton", 26, "123456789", new ArrayList<>(1), new ArrayList<>(1));
+        Cliente cliente = new Cliente("12345678900", "Cleyton", 26, "123456789", new ArrayList<>(1), new Endereco());
         Mockito.when(clienteRepository.findById(clienteId)).thenReturn(Optional.of(cliente));
         ResponseEntity<Cliente> responseEntity = clienteController.findById(clienteId);
         Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());

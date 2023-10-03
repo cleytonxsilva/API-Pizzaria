@@ -30,9 +30,9 @@ public class PedidoDTO {
 
     private String descricao;
 
-    private List<Funcionario> funcionarios;
+    private Funcionario funcionario;
 
     public Pedido transformObject() {
-        return new Pedido(numeroPedido, entregar, cliente, produtos, estado, valorTotal, descricao, funcionarios);
+        return new Pedido(numeroPedido, entregar, cliente, produtos, estado, valorTotal, descricao, funcionario);
     }
 }

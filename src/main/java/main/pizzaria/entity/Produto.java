@@ -31,7 +31,7 @@ public class Produto {
     @Column(name = "valor_produto", nullable = false)
     private BigDecimal valorProduto;
 
-    @OneToMany(mappedBy = "produtos")
+    @OneToMany(mappedBy = "produto")
     private List<Sabor> sabores;
 
     @ManyToMany
@@ -39,4 +39,12 @@ public class Produto {
             joinColumns = @JoinColumn(name = "produtos_id"),
             inverseJoinColumns = @JoinColumn(name = "pedidos_id"))
     private List<Pedido> pedidos;
+
+    public Produto(String nome, Tamanho tamanho, BigDecimal valorProduto, List<Sabor> sabores, List<Pedido> pedidos) {
+        this.nome = nome;
+        this.tamanho = tamanho;
+        this.valorProduto = valorProduto;
+        this.sabores = sabores;
+        this.pedidos = pedidos;
+    }
 }
