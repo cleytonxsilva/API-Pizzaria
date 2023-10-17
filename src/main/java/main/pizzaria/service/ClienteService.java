@@ -3,16 +3,12 @@ package main.pizzaria.service;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import main.pizzaria.dto.ClienteDTO;
-import main.pizzaria.dto.EnderecoDTO;
 import main.pizzaria.entity.Cliente;
-import main.pizzaria.entity.Endereco;
 import main.pizzaria.repository.ClienteRepository;
 import org.asynchttpclient.util.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +27,7 @@ public class ClienteService {
         Assertions.assertNotNull(clienteDTO.getCpf(), "CPF não pode ser nulo");
         Assertions.assertNotNull(clienteDTO.getNome(), "Nome não pode ser nulo");
         Assertions.assertNotNull(clienteDTO.getTelefone(), "Telefone não pode ser nulo");
+        Assertions.assertNotNull(clienteDTO.getEndereco(), "Endereço não pode ser nulo");
 
         Cliente novoCliente = new Cliente();
         novoCliente.setCpf(clienteDTO.getCpf());
