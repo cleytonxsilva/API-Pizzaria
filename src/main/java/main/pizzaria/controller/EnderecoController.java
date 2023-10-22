@@ -28,8 +28,8 @@ public class EnderecoController {
         }
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<Endereco> findById(@RequestParam("id") final Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Endereco> findById(@PathVariable final Long id) {
         try {
             return ResponseEntity.ok(enderecoService.findById(id).orElse(null));
         } catch (DataIntegrityViolationException e) {
@@ -63,8 +63,8 @@ public class EnderecoController {
         }
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> delete(@RequestParam("id") final Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable final Long id) {
         try {
             final Endereco enderecoBanco = enderecoService.findById(id).orElse(null);
             if (enderecoBanco != null) {

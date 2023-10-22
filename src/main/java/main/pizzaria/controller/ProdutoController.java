@@ -30,8 +30,8 @@ public class ProdutoController {
         }
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<Produto> findById(@RequestParam("id") final Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Produto> findById(@PathVariable final Long id) {
         try {
             return ResponseEntity.ok(produtoService.findById(id).orElse(null));
         } catch (DataIntegrityViolationException e) {
@@ -59,8 +59,8 @@ public class ProdutoController {
         }
     }
 
-    @DeleteMapping("/excluir")
-    public ResponseEntity<String> delete(@RequestParam("id") final Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable final Long id) {
         try {
             produtoService.delete(id);
             return ResponseEntity.ok("Produto excluído com sucesso");

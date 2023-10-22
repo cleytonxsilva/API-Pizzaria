@@ -28,8 +28,8 @@ public class PedidoController {
         }
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<Pedido> findById(@RequestParam("id") final Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Pedido> findById(@PathVariable final Long id) {
         try {
             return ResponseEntity.ok(pedidoService.findById(id).orElse(null));
         } catch (DataIntegrityViolationException e) {
@@ -57,8 +57,8 @@ public class PedidoController {
         }
     }
 
-    @DeleteMapping("/excluir")
-    public ResponseEntity<String> delete(@RequestParam("id") final Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable final Long id) {
         try {
             pedidoService.delete(id);
             return ResponseEntity.ok("Pedido excluído com sucesso");

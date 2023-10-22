@@ -29,8 +29,8 @@ public class FuncionarioController {
         }
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<Funcionario> findById(@RequestParam("id") final Long id) {
+    @GetMapping
+    public ResponseEntity<Funcionario> findById(@PathVariable final Long id) {
         try {
             return ResponseEntity.ok(funcionarioService.findById(id).orElse(null));
         } catch (DataIntegrityViolationException e) {
@@ -72,8 +72,8 @@ public class FuncionarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Erro ao editar cadastro!", e);
         }
     }
-    @DeleteMapping
-    public ResponseEntity<String> delete(@RequestParam("id") final Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable final Long id){
         try {
             final Funcionario funcionarioBanco = this.funcionarioService.findById(id).orElse(null);
             if(funcionarioBanco == null){

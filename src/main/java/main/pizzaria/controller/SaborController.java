@@ -28,8 +28,8 @@ public class SaborController {
         }
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<Sabor> findById(@RequestParam("id") final Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Sabor> findById(@PathVariable final Long id) {
         try {
             return ResponseEntity.ok(saborService.findById(id).orElse(null));
         } catch (DataIntegrityViolationException e) {
@@ -57,8 +57,8 @@ public class SaborController {
         }
     }
 
-    @DeleteMapping("/excluir")
-    public ResponseEntity<String> delete(@RequestParam("id") final Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable final Long id) {
         try {
             saborService.delete(id);
             return ResponseEntity.ok("Sabor excluído com sucesso");

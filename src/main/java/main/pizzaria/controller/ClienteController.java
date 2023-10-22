@@ -30,8 +30,8 @@ public class ClienteController {
         }
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<Cliente> findById(@RequestParam("id") final Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> findById(@PathVariable final Long id){
         try {
             return ResponseEntity.ok(clienteService.findById(id).orElse(null));
         }catch (DataIntegrityViolationException e){
@@ -78,8 +78,8 @@ public class ClienteController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erro ao atualizar cliente", e);
         }
     }
-    @DeleteMapping
-    public ResponseEntity<String> delete(@RequestParam("id") final Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable final Long id){
         try {
             final Cliente clienteBanco = this.clienteService.findById(id).orElse(null);
             if(clienteBanco == null){
