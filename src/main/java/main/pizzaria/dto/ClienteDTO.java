@@ -21,12 +21,10 @@ public class ClienteDTO {
 
     private String telefone;
 
-    private List<Pedido> pedidos;
-
     private Endereco endereco;
 
 
     public Cliente transformObject(){
-        return new Cliente(cpf, nome, idade, telefone, pedidos, endereco);
+        return new Cliente(cpf, nome, idade, telefone, endereco);
     }
 }

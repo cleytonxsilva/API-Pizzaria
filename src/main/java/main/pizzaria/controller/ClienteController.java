@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {

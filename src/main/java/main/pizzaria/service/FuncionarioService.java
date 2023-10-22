@@ -36,7 +36,6 @@ public class FuncionarioService {
         novoFuncionario.setCpf(funcionario.getCpf());
         novoFuncionario.setTelefone(funcionario.getTelefone());
         novoFuncionario.setMatricula(funcionario.getMatricula());
-        novoFuncionario.setPedidos(funcionario.getPedidos());
 
         funcionarioRepository.save(novoFuncionario);
     }

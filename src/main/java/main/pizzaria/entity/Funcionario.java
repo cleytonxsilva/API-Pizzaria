@@ -32,14 +32,10 @@ public class Funcionario {
     @Column(unique = true, nullable = false)
     private Integer matricula;
 
-    @OneToMany(mappedBy = "funcionario")
-    private List<Pedido> pedidos;
-
-    public Funcionario(String nome, String cpf, Integer telefone, int matricula, List<Pedido> pedidos) {
+    public Funcionario(String nome, String cpf, Integer telefone, Integer matricula) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.matricula = matricula;
-        this.pedidos = pedidos;
     }
 }

@@ -19,11 +19,9 @@ public class FuncionarioDTO {
 
     private Integer telefone;
 
-    private int matricula;
-
-    private List<Pedido> pedidos;
+    private Integer matricula;
 
     public Funcionario transformObject() {
-        return new Funcionario(nome, cpf, telefone, matricula, pedidos);
+        return new Funcionario(nome, cpf, telefone, matricula);
     }
 }

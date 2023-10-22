@@ -29,7 +29,7 @@ public class Pedido {
     private boolean entregar;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "cliente", nullable = false)
     private Cliente cliente;
 
     @ManyToMany(mappedBy = "pedidos")
@@ -44,6 +44,7 @@ public class Pedido {
 
     @Column(name = "descricao", nullable = false, length = 100)
     private String descricao;
+
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id")

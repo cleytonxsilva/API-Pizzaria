@@ -1,5 +1,6 @@
 package main.pizzaria.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,19 +31,15 @@ public class Cliente {
     @Column(name = "telefone", nullable = false, length = 14)
     private String telefone;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Pedido> pedidos;
-
     @ManyToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    public Cliente(String cpf, String nome, int idade, String telefone, List<Pedido> pedidos, Endereco endereco) {
+    public Cliente(String cpf, String nome, int idade, String telefone, Endereco endereco) {
         this.cpf = cpf;
         this.nome = nome;
         this.idade = idade;
         this.telefone = telefone;
-        this.pedidos = pedidos;
         this.endereco = endereco;
     }
 
