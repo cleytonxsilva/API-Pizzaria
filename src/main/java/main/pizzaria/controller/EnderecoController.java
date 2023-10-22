@@ -47,8 +47,8 @@ public class EnderecoController {
         }
     }
 
-    @PutMapping("/editar")
-    public ResponseEntity<String> update(@RequestParam("id") final Long id, @RequestBody final EnderecoDTO endereco) {
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable final Long id, @RequestBody final EnderecoDTO endereco) {
         try {
             final Endereco enderecoBanco = enderecoService.findById(id).orElse(null);
             if (enderecoBanco != null) {

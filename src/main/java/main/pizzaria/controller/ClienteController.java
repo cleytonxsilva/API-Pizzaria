@@ -60,8 +60,8 @@ public class ClienteController {
         }
     }
 
-    @PutMapping("/editar")
-    public ResponseEntity<String> update(@RequestParam("nome") final Long id, @RequestBody final ClienteDTO clienteDTO) {
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable final Long id, @RequestBody final ClienteDTO clienteDTO) {
         try {
 
             Optional<Cliente> clienteBancoOptional = clienteService.findById(id);

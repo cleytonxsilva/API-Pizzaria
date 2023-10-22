@@ -41,8 +41,8 @@ public class FuncionarioService {
     }
 
     @Transactional
-    public void update(String nome, Funcionario funcionario) {
-        Funcionario funcionarioBanco = findByNome(nome).orElse(null);
+    public void update(Long id, Funcionario funcionario) {
+        Funcionario funcionarioBanco = findById(id).orElse(null);
         assert funcionarioBanco != null;
         funcionarioBanco.setNome(funcionario.getNome());
         funcionarioBanco.setTelefone(funcionario.getTelefone());

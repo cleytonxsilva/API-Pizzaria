@@ -47,8 +47,8 @@ public class SaborController {
         }
     }
 
-    @PutMapping("/editar")
-    public ResponseEntity<String> update(@RequestParam("id") final Long id, @RequestBody final SaborDTO saborDTO) {
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable final Long id, @RequestBody final SaborDTO saborDTO) {
         try {
             saborService.update(id, saborDTO);
             return ResponseEntity.ok("Sabor editado com sucesso");

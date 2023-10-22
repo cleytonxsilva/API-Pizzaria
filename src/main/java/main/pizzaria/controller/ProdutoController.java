@@ -49,8 +49,8 @@ public class ProdutoController {
         }
     }
 
-    @PutMapping("/editar")
-    public ResponseEntity<String> update(@RequestParam("id") final Long id, @RequestBody final ProdutoDTO produtoDTO) {
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable final Long id, @RequestBody final ProdutoDTO produtoDTO) {
         try {
             produtoService.update(id, produtoDTO);
             return ResponseEntity.ok("Produto editado com sucesso");

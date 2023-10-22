@@ -47,8 +47,8 @@ public class PedidoController {
         }
     }
 
-    @PutMapping("/editar")
-    public ResponseEntity<String> update(@RequestParam("id") final Long id, @RequestBody final PedidoDTO pedidoDTO) {
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable final Long id, @RequestBody final PedidoDTO pedidoDTO) {
         try {
             pedidoService.update(id, pedidoDTO);
             return ResponseEntity.ok("Pedido editado com sucesso");

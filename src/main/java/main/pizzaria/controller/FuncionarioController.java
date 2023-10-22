@@ -58,15 +58,15 @@ public class FuncionarioController {
         }
     }
 
-    @PutMapping("/editar")
-    public ResponseEntity<String> update(@RequestParam("nome") final String nome, @RequestBody final Funcionario funcionario) {
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable final Long id, @RequestBody final Funcionario funcionario) {
         try{
             final Funcionario funcionarioBanco = this.funcionarioService.findByNome(funcionario.getNome()).orElse(null);
             if(funcionarioBanco != funcionario)
             {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Não foi possível identificar o registro informado");
             }
-            this.funcionarioService.update(nome, funcionarioBanco);//parametros errados?
+            this.funcionarioService.update(id, funcionarioBanco);
             return ResponseEntity.ok("Funcionario editado com sucesso");
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Erro ao editar cadastro!", e);
