@@ -29,7 +29,7 @@ public class FuncionarioController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<Funcionario> findById(@PathVariable final Long id) {
         try {
             return ResponseEntity.ok(funcionarioService.findById(id).orElse(null));
