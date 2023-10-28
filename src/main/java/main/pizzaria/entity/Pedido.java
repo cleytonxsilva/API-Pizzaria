@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "pedidos", schema = "public")
-@AllArgsConstructor
+
 @NoArgsConstructor
 public class Pedido {
 
@@ -50,7 +50,8 @@ public class Pedido {
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 
-    public Pedido(int numeroPedido, boolean entregar, Cliente cliente, List<Produto> produtos, Estado estado, BigDecimal valorTotal, String descricao, Funcionario funcionario) {
+    public Pedido(Long id, int numeroPedido, boolean entregar, Cliente cliente, List<Produto> produtos, Estado estado, BigDecimal valorTotal, String descricao, Funcionario funcionario) {
+        this.id = id;
         this.numeroPedido = numeroPedido;
         this.entregar = entregar;
         this.cliente = cliente;

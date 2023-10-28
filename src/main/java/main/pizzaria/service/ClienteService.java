@@ -24,6 +24,7 @@ public class ClienteService {
 
     @Transactional
     public void create(ClienteDTO clienteDTO) {
+
         Assertions.assertNotNull(clienteDTO.getCpf(), "CPF não pode ser nulo");
         Assertions.assertNotNull(clienteDTO.getNome(), "Nome não pode ser nulo");
         Assertions.assertNotNull(clienteDTO.getTelefone(), "Telefone não pode ser nulo");
@@ -56,23 +57,6 @@ public class ClienteService {
         clienteBanco.setNome(clienteDTO.getNome());
         clienteBanco.setIdade(clienteDTO.getIdade());
         clienteBanco.setTelefone(clienteDTO.getTelefone());
-
-//        List<Endereco> enderecos = new ArrayList<>();
-//
-//        for (Endereco endereco : clienteDTO.getEnderecos()) {
-//            Assert.notNull(endereco, "Endereço não pode ser nulo");
-//            Assert.notNull(endereco.getRua(), "Rua do endereço não pode ser nula");
-//            Assert.notNull(endereco.getNumero(), "Número do endereço não pode ser nulo");
-//
-//            Endereco novoEndereco = new Endereco();
-//            novoEndereco.setRua(endereco.getRua());
-//            novoEndereco.setNumero(endereco.getNumero());
-//            enderecos.add(novoEndereco);
-//        }
-//
-//        Assert.isTrue(!enderecos.isEmpty(), "O cliente deve ter pelo menos um endereço.");
-//
-//        clienteBanco.setEnderecos(enderecos);
 
         clienteRepository.save(clienteBanco);
     }

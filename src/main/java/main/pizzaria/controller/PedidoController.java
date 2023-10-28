@@ -48,10 +48,10 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable final Long id, @RequestBody final PedidoDTO pedidoDTO) {
+    public ResponseEntity<HttpStatus> update(@PathVariable final Long id, @RequestBody final PedidoDTO pedidoDTO) {
         try {
             pedidoService.update(id, pedidoDTO);
-            return ResponseEntity.ok("Pedido editado com sucesso");
+            return ResponseEntity.ok(HttpStatus.CREATED);
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erro ao editar pedido!", e);
         }

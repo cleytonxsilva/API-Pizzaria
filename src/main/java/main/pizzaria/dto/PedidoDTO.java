@@ -33,6 +33,6 @@ public class PedidoDTO {
     private Funcionario funcionario;
 
     public Pedido transformObject() {
-        return new Pedido(numeroPedido, entregar, cliente, produtos, estado, valorTotal, descricao, funcionario);
+        return new Pedido(id, numeroPedido, entregar, cliente, produtos, estado, valorTotal, descricao, funcionario);
     }
 }
